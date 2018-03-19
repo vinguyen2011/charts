@@ -1,0 +1,20 @@
+<link rel="import" href="../../bower_components/vaadin-charts/vaadin-chart-default-theme.html">
+
+<dom-module id="css-style-example" theme-for="vaadin-chart">
+    <template>
+        <style include="vaadin-chart-default-theme">
+            :host {
+                --vaadin-charts-color-0: orange;
+                --vaadin-charts-color-1: red;
+            }
+            .highcharts-title {
+                fill: orange;
+                font-size: xx-large;
+            }
+
+            :host(.blue-subtitle) .highcharts-subtitle {
+                fill: blue;
+            }
+        </style>
+    </template>
+</dom-module>

@@ -1,0 +1,188 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/vaadin-charts/vaadin-chart.html">
+<link rel="import" href="shared-style.html">
+<link rel="import" href="../../bower_components/google-chart/google-chart.html">
+
+<dom-module id="my-app-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+    <google-chart
+            type='pie'
+            options='{"title": "Distribution of days in 2001Q1"}'
+            cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
+            rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'>
+    </google-chart>
+
+    <vaadin-chart id="myPieChart"></vaadin-chart>
+    <vaadin-chart id="myBarChart"></vaadin-chart>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class MyAppApp extends Polymer.Element {
+      static get is() { return 'my-app-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'my-app-app'
+          }
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this._renderPieChart();
+        this._renderBarChart();
+      }
+
+      _renderPieChart() {
+        this.$.myPieChart.update({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+         title: {
+           text: 'The chart title'
+         },
+         subtitle: {
+           text: 'Subtitle'
+         },
+         tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+         xAxis: {
+           categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+         },
+         plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+         series: [{
+           type: 'pie',
+           colorByPoint: true,
+           data: [{
+            name: 'Chrome',
+            y: 61.41,
+            sliced: true,
+            selected: true
+          }, {
+              name: 'Internet Explorer',
+              y: 11.84
+          }, {
+              name: 'Firefox',
+              y: 10.85
+          }, {
+              name: 'Edge',
+              y: 4.67
+          }, {
+              name: 'Safari',
+              y: 4.18
+          }, {
+              name: 'Sogou Explorer',
+              y: 1.64
+          }, {
+              name: 'Opera',
+              y: 1.6
+          }, {
+              name: 'QQ',
+              y: 1.2
+          }, {
+              name: 'Other',
+              y: 2.61
+          }]
+         }]
+        });
+      }
+
+      _renderBarChart() {
+        this.$.myBarChart.update({
+            chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Historic World Population by Region'
+        },
+        subtitle: {
+            text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+        },
+        xAxis: {
+            categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Population (millions)',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' millions'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Year 1800',
+            data: [107, 31, 635, 203, 2]
+        }, {
+            name: 'Year 1900',
+            data: [133, 156, 947, 408, 6]
+        }, {
+            name: 'Year 2000',
+            data: [814, 841, 3714, 727, 31]
+        }, {
+            name: 'Year 2016',
+            data: [1216, 1001, 4436, 738, 40]
+        }]
+        });
+      }
+    }
+
+    window.customElements.define(MyAppApp.is, MyAppApp);
+  </script>
+</dom-module>
