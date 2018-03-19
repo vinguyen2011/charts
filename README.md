@@ -1,6 +1,8 @@
-# \<my-app\>
+# Sources
 
-
+Google chart: https://www.webcomponents.org/element/GoogleWebComponents/google-chart/elements/google-chart
+Vaadin high chart: https://charts.demo.vaadin.com/vaadin-charts/components/vaadin-charts/#/elements/vaadin-chart
+High chart config: http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-basic/
 
 ## Install the Polymer-CLI
 
